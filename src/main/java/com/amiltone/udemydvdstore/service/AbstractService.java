@@ -1,23 +1,33 @@
+/*
 package com.amiltone.udemydvdstore.service;
 
 import com.amiltone.udemydvdstore.repository.AbstractRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@AllArgsConstructor
-@NoArgsConstructor
 @Service
-public class AbstractService<T, ID, R extends AbstractRepository<T, ID>> implements AbstractServiceInterface<T, ID>{
+public class AbstractService<T, DTO, ID, R extends AbstractRepository<T, ID>> implements AbstractServiceInterface<T, ID>{
 
-    private R repository;
+    private final R repository;
+    private ModelMapper modelMapper;
+
+    AbstractService() {
+        this.repository = null;
+    }
+    public AbstractService(R repository) {
+        this.repository = repository;
+    }
 
     @Override
-    public T create(T entity) {
-        return repository.save(entity);
+    public DTO create(DTO dto) {
+        T entity = modelMapper.map(dto, T)
+
+        return modelMapper.map(repository.save(entity), DTO);
     }
 
     @Override
@@ -47,3 +57,4 @@ public class AbstractService<T, ID, R extends AbstractRepository<T, ID>> impleme
         repository.deleteAll();
     }
 }
+*/
