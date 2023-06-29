@@ -1,8 +1,11 @@
 package com.amiltone.udemydvdstore.repository;
 
 import com.amiltone.udemydvdstore.entity.Movie;
+import org.springframework.data.repository.ListCrudRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.UUID;
 
-public interface MovieRepository extends AbstractRepository<Movie, UUID> {
+@Repository
+public interface MovieRepository extends ListCrudRepository<Movie, UUID> {
 }
